@@ -13,8 +13,6 @@ namespace SearchFighter
         static void Main(string[] args)
         {
             //args = new string[] { ".net", "java" };
-            //args = new string[] { "man", "woman", "gay" };
-            //args = new string[] { "Alan", "Toledo", "Ollanta" };
 
             if (args.Count() == 0)
             {
@@ -32,8 +30,6 @@ namespace SearchFighter
 
             Dictionary<string, long> googleResults = new Dictionary<string, long>();
             Dictionary<string, long> bingResults = new Dictionary<string, long>();
-
-            //Dictionary<string, long> totalResults = new Dictionary<string, long>();
 
             try
             {
@@ -68,8 +64,6 @@ namespace SearchFighter
                     totalResults = "Tie";
                 }
 
-
-
                 Console.WriteLine("Google Winner: {0}", maxGoogle.Key);
                 Console.WriteLine("Bing Winner: {0}", maxBing.Key);
 
@@ -87,12 +81,16 @@ namespace SearchFighter
 
         }
 
+        /// <summary>
+        /// Write a Console line in color
+        /// </summary>
+        /// <param name="value">Text to write</param>
         static void WriteColorLine(string value)
         {
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(value);
-           Console.ResetColor();
+            Console.ResetColor();
         }
 
         private static bool HelpRequired(string param)
@@ -100,6 +98,11 @@ namespace SearchFighter
             return param == "-h" || param == "--help" || param == "/?";
         }
 
+        /// <summary>
+        /// Format a number using thousand separator
+        /// </summary>
+        /// <param name="number">Value to be formatted</param>
+        /// <returns></returns>
         public static string FormatNumber(long number)
         {
             string result = number.ToString("0,0", CultureInfo.InvariantCulture);
@@ -115,14 +118,6 @@ namespace SearchFighter
 
             long total = GetTotal(_html, ">About ", " results<");
 
-            //string keyString = ">About ";
-
-            //int pFrom = _html.IndexOf(keyString) + keyString.Length;
-            //int pTo = _html.LastIndexOf(" results<");
-
-            //String total = _html.Substring(pFrom, pTo - pFrom);
-            //total = total.Replace(",", "").Replace(".", "");
-
             return total;
 
         }
@@ -132,8 +127,6 @@ namespace SearchFighter
             var url = "https://www.bing.com/search?q=" + query;
 
             string _html = ReadTextFromUrl(url);
-
-            //long total = GetTotal(_html, @"<span class=""sb_count"">", @" resultados<");
 
             string keyString = @"<span class=""sb_count"">";
 
